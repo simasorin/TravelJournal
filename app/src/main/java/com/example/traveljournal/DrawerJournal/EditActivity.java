@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,7 +32,6 @@ public class EditActivity extends AppCompatActivity {
     private EditText tripDestination;
     private Button saveButton;
 
-    private static FragmentManager fragmentManager;
 
     private DatePickerDialog datePickerDialog;
     private Button dateButton1;
@@ -45,6 +45,7 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.example.traveljournal.R.layout.activity_edit);
+
 
         initDatePicker();
         dateButton1 = findViewById(R.id.datePickerButton1);
@@ -62,7 +63,6 @@ public class EditActivity extends AppCompatActivity {
         tripName.setText(s);
         tripDestination.setText(s2);
 
-        fragmentManager = getSupportFragmentManager();//Get Fragment Manager
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -71,14 +71,14 @@ public class EditActivity extends AppCompatActivity {
                 String tripNameEdit = tripName.getText().toString(); //store the edited value in a string variable
                 String tripDestinationEdit = tripDestination.getText().toString();
 
+                Bundle data = new Bundle();//Use bundle to pass data
+                data.putString("tripNameEdit", tripNameEdit);//put string in bundle with a key value
+                data.putString("tripDestinationEdit", tripDestinationEdit);//put string in bundle with a key value
 
                 Fragment argumentFragment = new HomeFragment();//Get Fragment Instance
-                Bundle data = new Bundle();//Use bundle to pass data
-                data.putString("tripNameEdit", tripNameEdit);//put string, int, etc in bundle with a key value
-                data.putString("tripDestinationEdit", tripDestinationEdit);//put string, int, etc in bundle with a key value
                 argumentFragment.setArguments(data);//Finally set argument bundle to fragment
 
-                fragmentManager.beginTransaction().replace(R.id.cstrLayout, argumentFragment).commit();//now replace the argument fragment
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_placeholder,argumentFragment).commit();
             }
         });
 
@@ -126,29 +126,29 @@ public class EditActivity extends AppCompatActivity {
 
     //here we convert from month no 1 to January, month no 2 to February  etc.
     private String getMonthFormat(int month) {
-        if(month == 1)
+        if (month == 1)
             return "JAN";
-        if(month == 2)
+        if (month == 2)
             return "FEB";
-        if(month == 3)
+        if (month == 3)
             return "MAR";
-        if(month == 4)
+        if (month == 4)
             return "APR";
-        if(month == 5)
+        if (month == 5)
             return "MAY";
-        if(month == 6)
+        if (month == 6)
             return "JUN";
-        if(month == 7)
+        if (month == 7)
             return "JUL";
-        if(month == 8)
+        if (month == 8)
             return "AUG";
-        if(month == 9)
+        if (month == 9)
             return "SEP";
-        if(month == 10)
+        if (month == 10)
             return "OCT";
-        if(month == 11)
+        if (month == 11)
             return "NOV";
-        if(month == 12)
+        if (month == 12)
             return "DEC";
 
         //default should never happen
@@ -157,6 +157,6 @@ public class EditActivity extends AppCompatActivity {
 
     //date picker
     public void openDatePicker(View view) {
-            datePickerDialog.show();
+        datePickerDialog.show();
     }
 }

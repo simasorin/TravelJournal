@@ -1,35 +1,29 @@
 package com.example.traveljournal.DrawerJournal.ui.home;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.traveljournal.DrawerJournal.EditActivity;
-import com.example.traveljournal.MainActivity;
 import com.example.traveljournal.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private static FragmentManager fragmentManager;
+
+    private static final String TAG = "TripDetail";
 
     public HomeFragment() {
     }
@@ -38,8 +32,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     TextView myText1;
     FloatingActionButton fab;
 
-    EditText tripName ;
-    EditText tripDestination ;
+    EditText tripName;
+    EditText tripDestination;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -89,12 +83,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        //Get Argument that passed from activity in "data" key value
-        //String getArgument = getArguments().getString("tripNameEdit");
-       // String getArgument1 = getArguments().getString("tripDestinationEdit");
-
-       //myText.setText(getArgument);//set string over textview
-       // myText.setText(getArgument1);//set string over textview
 
         return myView;
 
@@ -113,6 +101,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         startActivity(intent);//send data to EditActivity;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            String tripNameEdit = getArguments().getString("tripNameEdit");
+            String tripDestinationEdit = getArguments().getString("tripDestinationEdit");
+
+            Log.d(TAG, "onCreate: tripNameEdit=" + tripNameEdit);
+            Log.d(TAG, "onCreate: tripDestinationEdit=" + tripDestinationEdit);
+
+            myText.setText(tripNameEdit);
+            myText1.setText(tripDestinationEdit);
+        }
+    }
 }
 
 
