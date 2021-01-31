@@ -4,19 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.example.traveljournal.DrawerJournal.NavigationDrawerActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
+    Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Redirect to the main activity
-        startActivity(new Intent(this,
-                NavigationDrawerActivity.class));
+        setContentView(R.layout.splashfile);
 
-        finish(); // we use this so the user cannot go back to splashscreen
+
+        handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent=new Intent(SplashActivity.this,NavigationDrawerActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        },3000);
     }
 }

@@ -12,6 +12,8 @@
     <string name="contact">Contact me</string>
     <string name="destination">Destination</string>
     <string name="trip_name">Trip name</string>
-    <string name="price" > 1023$ </string>
+    <string name="price" > 400€ </string>
     <string name="submit" > Edit </string>
+    <string name="aboutParis" >Paris is one of my favourite cities!
+I’m so in love with its museums, French cuisine and the vibe the city has. </string>
 </resources>

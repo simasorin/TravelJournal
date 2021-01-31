@@ -3,6 +3,7 @@ package com.example.traveljournal.DrawerJournal;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.util.Log;
@@ -33,6 +34,9 @@ public class EditActivity extends AppCompatActivity {
     private Button saveButton;
 
 
+    TextView myText;
+    TextView myText1;
+
     private DatePickerDialog datePickerDialog;
     private Button dateButton1;
     private Button dateButton2;
@@ -40,11 +44,12 @@ public class EditActivity extends AppCompatActivity {
     private Calendar startDate;
     private Calendar endDate;
 
+
     //here we get the texts from HomeFragment
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.traveljournal.R.layout.activity_edit);
+        setContentView(R.layout.activity_edit);
 
 
         initDatePicker();
@@ -63,8 +68,6 @@ public class EditActivity extends AppCompatActivity {
         tripName.setText(s);
         tripDestination.setText(s2);
 
-
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +84,8 @@ public class EditActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_placeholder,argumentFragment).commit();
             }
         });
+
+
 
     }
 
@@ -158,5 +163,9 @@ public class EditActivity extends AppCompatActivity {
     //date picker
     public void openDatePicker(View view) {
         datePickerDialog.show();
+    }
+
+    public void tripDetails(View view) {
+
     }
 }

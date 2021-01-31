@@ -57,8 +57,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
-        // Passing each menu ID as a set of Ids because each menu should be considered as top level destinations.
+        // Passing each menu ID as a set of Ids
         mAppBarConfiguration = new AppBarConfiguration.Builder(getTopLevelDestinationIds())
                 .setOpenableLayout(drawer)
                 .build();
@@ -74,10 +73,6 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         // Now we hook up the NavigationView
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        // If we have custom navigation actions or we want to manually handle the fragments
-//        navigationView.setNavigationItemSelectedListener(this);
-        // Set the start destination item as checked initially
-//        navigationView.setCheckedItem(R.id.nav_home);
 
         navigationView.getMenu().findItem(R.id.nav_share).setOnMenuItemClickListener(menuItem -> {
             Toast.makeText(NavigationDrawerActivity.this, "Share some content", Toast.LENGTH_SHORT).show();
@@ -156,7 +151,6 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
 
-            // TODO: Change the container type to the correct type(static fragment tag is not supported) to work correctly
             fragmentManager
                     .beginTransaction()
                     .replace(R.id.main_content, fragment)

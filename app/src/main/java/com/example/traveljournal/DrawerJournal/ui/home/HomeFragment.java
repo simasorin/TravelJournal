@@ -1,12 +1,14 @@
 package com.example.traveljournal.DrawerJournal.ui.home;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.traveljournal.DrawerJournal.EditActivity;
 import com.example.traveljournal.R;
+import com.example.traveljournal.TripDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -31,6 +34,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     TextView myText;
     TextView myText1;
     FloatingActionButton fab;
+    ImageView tripDetails;
 
     EditText tripName;
     EditText tripDestination;
@@ -83,6 +87,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        //trip details
+        tripDetails = myView.findViewById(R.id.imageView1);
+        tripDetails.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TripDetails.class);
+                startActivity(intent);
+            }
+
+        });
+
+
+
+
+        if (getArguments() != null) {
+
+            Bundle b = getArguments();
+            String tripNameEdit = b.getString("tripNameEdit");
+            String tripDestinationEdit = b.getString("tripDestinationEdit");
+
+            Log.d(TAG, "onCreate: tripNameEdit=" + tripNameEdit);
+            Log.d(TAG, "onCreate: tripDestinationEdit=" + tripDestinationEdit);
+
+            myText.setText(tripNameEdit);
+            myText1.setText(tripDestinationEdit);
+        }
+
 
         return myView;
 
@@ -105,16 +135,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            String tripNameEdit = getArguments().getString("tripNameEdit");
-            String tripDestinationEdit = getArguments().getString("tripDestinationEdit");
-
-            Log.d(TAG, "onCreate: tripNameEdit=" + tripNameEdit);
-            Log.d(TAG, "onCreate: tripDestinationEdit=" + tripDestinationEdit);
-
-            myText.setText(tripNameEdit);
-            myText1.setText(tripDestinationEdit);
-        }
     }
 }
 
